@@ -43,7 +43,7 @@ class ViewController: UIViewController {
     
     // Removes an event from the EKEventStore. The method assumes the eventStore is created and
     // accessible
-    func removeEvent(eventStore: EKEventStore, eventIdentifier: String) {
+    func deleteEvent(eventStore: EKEventStore, eventIdentifier: String) {
         let eventToRemove = eventStore.eventWithIdentifier(eventIdentifier)
         if (eventToRemove != nil) {
             do {
@@ -80,10 +80,10 @@ class ViewController: UIViewController {
         
         if (EKEventStore.authorizationStatusForEntityType(.Event) != EKAuthorizationStatus.Authorized) {
             eventStore.requestAccessToEntityType(.Event, completion: { (granted, error) -> Void in
-                self.removeEvent(eventStore, eventIdentifier: self.savedEventId)
+                self.deleteEvent(eventStore, eventIdentifier: self.savedEventId)
             })
         } else {
-            removeEvent(eventStore, eventIdentifier: savedEventId)
+            deleteEvent(eventStore, eventIdentifier: savedEventId)
         }
 
     }
